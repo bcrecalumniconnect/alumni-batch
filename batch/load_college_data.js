@@ -110,7 +110,7 @@ async function readSheet(cl) {
     };
 
     try {
-        let data = await gsapi.spreadsheets.values.get(opt_2019);
+        let data = await gsapi.spreadsheets.values.get(opt_2004);
         //console.log(data);
         //console.log(data.headers);
         alumnilist = data.data.values;
