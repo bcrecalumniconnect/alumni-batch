@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Alumni Connect</title>
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+		<script>
+		  // Your web app's Firebase configuration
+		  var firebaseConfig = {
+			apiKey: "AIzaSyD38yHwwtWZhTLPIloknfxYTUFKHYzxVr8",
+			authDomain: "alumni-bcrec.firebaseapp.com",
+			databaseURL: "https://alumni-bcrec.firebaseio.com",
+			projectId: "alumni-bcrec",
+			storageBucket: "alumni-bcrec.appspot.com",
+			messagingSenderId: "883103318072",
+			appId: "1:883103318072:web:985465a5901902f8"
+		  };
+			
+			var userName='';
+		  // Initialize Firebase
+		  firebase.initializeApp(firebaseConfig);
+			
+			function loginwithGoogle(){
+				console.log(firebase);
+				console.log(firebase.auth);
+				var provider = new firebase.auth.GoogleAuthProvider();
+				provider.addScope('profile');
+				provider.addScope('email');
+					firebase.auth().signInWithPopup(provider)
+						.then(function(result) {
+				 // This gives you a Google Access Token.
+				 var token = result.credential.accessToken;
+				 // The signed-in user info.
+				 var user = result.user;
+						
+				console.log(user);
+				console.log(user.email);
+				userName = 	user.email;	
+						document.getElementById('userid').innerHTML = 'Welcome ' + userName;
+					})
+				.catch(function(error){
+						console.log(error);
+					});
+			}
+		</script>
+	</head>
+	<body>
+		<h3>Home page</h3>
+		<button onclick={loginwithGoogle()}>Login with Google</button><br/>
+		<span id="userid"></span>
+		<form method="POST" action="new">
+			First Name<input type="text" name="fname"/><br/>
+			Last Name<input type="text" name="lname"/><br/>
+			<button type="submit" >Get Data</button>
+		</form>
+		
+	
+	</body>
+</html>
